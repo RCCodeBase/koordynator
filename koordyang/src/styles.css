@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+body, html {
+  font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    height: 100%;
+  }
+  html
+  {
+    scroll-behavior: smooth; 
+  }
+  h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+}

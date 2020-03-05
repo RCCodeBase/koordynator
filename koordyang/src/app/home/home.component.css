@@ -1,0 +1,31 @@
+header {
+    height: 100%;
+}
+
+.row {
+    height: 100%;
+    margin: 0px;
+}
+
+.bghead {
+    background-color: #2196F3;
+}
+
+.imghome {
+    padding-top: 30%;
+}
+
+header .header-content .header-content-inner {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.header-content-inner {
+    background-color: rgba(87, 85, 85, 0.1);
+  
+}
+
+.masthead {
+    padding-top: 20%;
+    text-align: center;
+}
