@@ -1,0 +1,85 @@
+<!-- Navigation -->
+<nav class="navbar  navbar-default navbar-expand-lg navbar-light">
+
+    <a class="navbar-brand" href="#">KOORDYNATOR</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="Toogleico"></span> Menu <i class="fa fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#about"></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#Why"></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#contact"></a>
+            </li>
+        </ul>
+
+
+        <a type="button" class="btn btn-warning link-btn">Profile</a>
+        <a type="button" class="btn btn-warning link-btn">Sign Out</a>
+
+    </div>
+
+</nav>
+
+<div class="container cont">
+    <h2>Event</h2>
+    <div class="card">
+        <div class="card-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <button type="button" class="buttonadd " data-toggle="modal" data-target="#myModal"><i
+                                class="fas fa-plus-circle"></i><br/> Add</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Event Details</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="container">
+                <div class="form-group">
+                    <label for="Event Type">Select Event Type</label>
+                    <select class="form-control" id="sel1">
+                      <option>Trade Fair</option>
+                      <option>Seminar</option>
+                    </select>
+                  </div> 
+                    <p>Please Select options:</p>
+                      <label class="checkbox-inline">
+                        <input type="checkbox" value="">&nbsp;Volunteers
+                      </label>
+                </div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal" routerLink="../events">Submit</button>
+            </div>
+
+        </div>
+    </div>
+</div>
