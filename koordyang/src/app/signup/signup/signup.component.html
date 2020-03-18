@@ -1,37 +1,38 @@
-
 <div class="container h-100">
-    <div class="row h-100 justify-content-center align-items-center">
-     
-<form  class="register col-lg-5  bg-blue"  novalidate>
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-      {{ errorMessage }}
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="form-group">
-      <label for="exampleInputEmail1">Name</label>
-      <input type="text" class="form-control" id="exampleInputName" aria-describedby="emailHelp"
-        placeholder="Enter Name" name = "name" >
-    </div>
-    <div class="form-group">
-      <label for="exampleInputEmail1">Email address</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-        placeholder="Enter email" name = "email" > 
-      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-    </div>
-    <div class="form-group">
-      <label for="exampleInputPassword1">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"  name="Password" >
-    </div>
-    <div class="form-group">
-        <label for="exampleInputEmail1">Company Name</label>
-        <input type="text" class="form-control" id="exampleInputName" aria-describedby="emailHelp"
-          placeholder="Company Name" name = "Company Name" >
-          <small id="emailHelp" class="form-text text-muted">(Not Mandatory)</small>
+  <div class="row h-100 justify-content-center align-items-center">
+    <form class="register col-lg-5  bg-blue"  #userRegForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+      <div *ngIf="ifError" class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ errorMessage }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-    <button type="submit" class="btn btn-warning">Register</button>
-    
-  </form>
-</div>
+      <div class="form-group">
+        <label for="exampleInputName">Name</label>
+        <input type="text" class="form-control" id="exampleInputName" aria-describedby="nameHelp"
+          placeholder="Enter Name" name="name" [(ngModel)]="User.name">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+          placeholder="Enter email" name="email" [(ngModel)]="User.email">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="Password1" [(ngModel)]="User.password">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword2">Confirm Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Confirm Password" name="Password2">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputCompany">Company Name</label>
+        <input type="text" class="form-control" id="exampleInputCompanyName" aria-describedby="comanyHelp"
+          placeholder="Company Name" name="CompanyName" [(ngModel)]="User.company">
+        <small id="emailHelp" class="form-text text-muted">(Not Mandatory)</small>
+      </div>
+      <button type="submit" class="btn btn-warning">Register</button>
+    </form>
+  </div>
 </div>
