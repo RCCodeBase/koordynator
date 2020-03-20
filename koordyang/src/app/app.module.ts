@@ -5,11 +5,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule,HTTP_INTERCEPTORS }from '@angular/common/http';
 
+import{UserService} from './service/user.service';
+import {AuthService} from './service/auth.service';
+import {AuthGuard} from './auth.guard';
+
 import { HomeComponent } from './home/home.component';
 import { SignupModule } from './signup/signup.module';
 import { CoordinatorModule } from './coordinator/coordinator.module';
 import { EventsModule } from './events/events.module';
 import { SigninComponent } from './signin/signin.component';
+
 
 @NgModule({
   declarations: [
@@ -27,7 +32,7 @@ import { SigninComponent } from './signin/signin.component';
     EventsModule
    
   ],
-  providers: [],
+  providers: [AuthGuard,UserService,AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

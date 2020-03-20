@@ -8,26 +8,25 @@ dotenv.config();
 
 //Import Routes
 const usersigupRoute = require("./routes/usersignup");
-const usersigninRoute = require("./routes/usersignin.js");
+const usersigninRoute = require("./routes/usersignin");
+const eventsRoute = require("./routes/events");
 
 
 app.use(cors({
     origin: [
         "http://localhost:4200"
     ],
-    exposedHeaders: ['Content-Length', 'token'],
+    exposedHeaders: ['Content-Length', 'Token'],
     credentials: true,
 }));
 
 
 app.use(express.json());
 
-
 //Adding middleware for routing
 app.use('/signup', usersigupRoute);
 app.use('/signin', usersigninRoute);
-
-
+app.use('/events', eventsRoute);
 
 //Connect to DB
 mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true, useUnifiedTopology: true }, () => {

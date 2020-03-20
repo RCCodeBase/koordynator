@@ -8,17 +8,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-  User ={};
   ifError = false;
   errorMessage="";
   constructor(private _register:UserService,private router:Router) { }
   
   ngOnInit() {
   }
-  onSubmit()
+  onSubmit(user)
   {
-    console.log(this.User);
-    this._register.register(this.User)
+    console.log(user.value);
+    this._register.registerCoordinator(user.value)
     .subscribe(
       data => {
         console.log('Success Registered User!', data)

@@ -1,6 +1,6 @@
 <div class="container h-100">
   <div class="row h-100 justify-content-center align-items-center">
-    <form class="register col-lg-5  bg-blue"  #userRegForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+    <form class="register col-lg-5  bg-blue"  #user="ngForm" (ngSubmit)="onSubmit(user)" novalidate>
       <div *ngIf="ifError" class="alert alert-danger alert-dismissible fade show" role="alert">
         {{ errorMessage }}
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -10,17 +10,17 @@
       <div class="form-group">
         <label for="exampleInputName">Name</label>
         <input type="text" class="form-control" id="exampleInputName" aria-describedby="nameHelp"
-          placeholder="Enter Name" name="name" [(ngModel)]="User.name">
+          placeholder="Enter Name" name="name" ngModel required>
       </div>
       <div class="form-group">
         <label for="exampleInputEmail1">Email address</label>
         <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-          placeholder="Enter email" name="email" [(ngModel)]="User.email">
+          placeholder="Enter email" name="email"  #email="ngModel" [class.is-invalid]="email.invalid && email.touched" ngModel required>
         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
       </div>
       <div class="form-group">
         <label for="exampleInputPassword1">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="Password1" [(ngModel)]="User.password">
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password" ngModel required>
       </div>
       <div class="form-group">
         <label for="exampleInputPassword2">Confirm Password</label>
@@ -29,10 +29,10 @@
       <div class="form-group">
         <label for="exampleInputCompany">Company Name</label>
         <input type="text" class="form-control" id="exampleInputCompanyName" aria-describedby="comanyHelp"
-          placeholder="Company Name" name="CompanyName" [(ngModel)]="User.company">
+          placeholder="Company Name" name="company" ngModel >
         <small id="emailHelp" class="form-text text-muted">(Not Mandatory)</small>
       </div>
-      <button type="submit" class="btn btn-warning">Register</button>
+      <button [disabled]="user.form.invalid"  type="submit" class="btn btn-warning">Register</button>
     </form>
   </div>
 </div>

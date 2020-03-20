@@ -10,13 +10,27 @@ import { Router } from '@angular/router';
 export class SigninComponent implements OnInit {
   ifError = false;
   errorMessage = "";
-  constructor(private _register: UserService, private router: Router) { }
+  constructor(private _login: UserService, private router: Router) { }
 
   ngOnInit() {
   }
 
-  onSubmit() {
-
+  onSubmit(userloginForm) {
+    console.log(userloginForm.value);
+    this._login.loginCoordinator(userloginForm.value)
+      .subscribe(
+        resp => {
+          // display its headers
+          console.log(resp.headers.get('token'));
+          localStorage.setItem('auth-token', resp.headers.get('token'));
+          this.router.navigate(['/coordinator']);
+        },
+        error => {
+          console.log(error);
+          this.ifError = true;
+          this.errorMessage = error.error;
+        }
+      )
   }
 
 }

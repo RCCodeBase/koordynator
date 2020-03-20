@@ -57,29 +57,30 @@
                 <h4 class="modal-title">Event Details</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
-
-            <!-- Modal body -->
-            <div class="modal-body">
-                <div class="container">
-                    <div class="form-group">
-                        <label for="Event Type">Select Event Type</label>
-                        <select class="form-control" id="sel1">
-                            <option>Trade Fair</option>
-                            <option>Seminar</option>
-                        </select>
+            <form #userloginForm="ngForm" (ngSubmit)="onSubmit(userloginForm)">
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="form-group">
+                            <label for="Event Type">Select Event Type</label>
+                            <select name="EventType" id="event" class="form-control" ngModel>
+                                <option *ngFor="let event of events">{{event}}</option>
+                            </select>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" name="volunteer" class="form-check-input" ngModel>
+                            <label for="" class="form-check-label">
+                                Please Select options if volunteers needed:
+                            </label>
+                        </div>
                     </div>
-                    <p>Please Select options:</p>
-                    <label class="checkbox-inline">
-                        <input type="checkbox" value="">&nbsp;Volunteers
-                    </label>
                 </div>
-            </div>
 
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-warning" data-dismiss="modal"
-                    routerLink="../events">Submit</button>
-            </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-warning">Submit</button>
+                </div>
+            </form>
 
         </div>
     </div>
