@@ -21,4 +21,7 @@ export class UserService {
   AddEvent(event){
     return this._http.post<any>("http://localhost:3000/events/coordinator",event);
   }
+  loadEvent(){
+    return this._http.get<any>("http://localhost:3000/events/coordinator");
+  }
 }

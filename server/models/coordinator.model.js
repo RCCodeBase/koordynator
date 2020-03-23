@@ -30,5 +30,4 @@ const CoordinatorSchema = mongoose.Schema({
     }
 });
 
-
 module.exports = mongoose.model('Coordinator',CoordinatorSchema);

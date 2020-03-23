@@ -31,14 +31,26 @@
     <h2>Event</h2>
     <div class="card">
         <div class="card-body">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
-                        <button type="button" class="buttonadd " data-toggle="modal" data-target="#myModal"><i
-                                class="fas fa-plus-circle"></i><br /> Add</button>
+            <!-- <div class="container">
+                <div class="row"> -->
+                    <div class="card-columns">
+                    <div *ngFor="let event of coordinatorEvents" >
+                        <div class="card">
+                        <img class="card-img-top" src="/assets/img/12.jpg" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">{{event.Title}}</h5>
+                            <p class="card-text">{{event.Description}}</p>
+                            <a href="#" class="btn btn-warning">Edit</a>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="card buttonadd" data-toggle="modal" data-target="#myModal" >
+                        <i
+                                class="fas fa-plus-circle"></i><br /> Add
                     </div>
                 </div>
-            </div>
+                <!-- </div>
+            </div> -->
 
         </div>
     </div>
@@ -47,7 +59,7 @@
 
 
 
-<!-- The Modal -->
+<!-- The Modal for adding new Event -->
 <div class="modal fade" id="myModal">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -57,10 +69,20 @@
                 <h4 class="modal-title">Event Details</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
-            <form #userloginForm="ngForm" (ngSubmit)="onSubmit(userloginForm)">
+            <form #userloginForm="ngForm" >
                 <!-- Modal body -->
+
                 <div class="modal-body">
                     <div class="container">
+                        <div class="form-group">
+                            <label for="exampleInputName">Event Name</label>
+                            <input type="text" class="form-control" id="exampleInputName" aria-describedby="nameHelp"
+                                placeholder="Title" name="Title" ngModel required>
+                        </div>
+                        <div class="form-group">
+                            <label for="comment">Description:</label>
+                            <textarea class="form-control" rows="3"  maxlength="100" id="Description" placeholder="Description about event in minimum words" name="Description" ngModel required></textarea>
+                          </div> 
                         <div class="form-group">
                             <label for="Event Type">Select Event Type</label>
                             <select name="EventType" id="event" class="form-control" ngModel>
@@ -78,7 +100,7 @@
 
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-warning">Submit</button>
+                    <button type="submit" class="btn btn-warning" data-dismiss="modal" (click)="onSubmit(userloginForm)">Submit</button>
                 </div>
             </form>
 
