@@ -1,8 +1,8 @@
 <div class="wrapper">
     <!-- Sidebar  -->
-    <nav id="sidebar">
+    <nav id="sidebar" [ngClass]="status ? 'active' : 'dec'">
    
-        <div id="navigatedesktop" class="sidebar-header sidebarCollapse">
+        <div id="navigatedesktop" class="sidebar-header sidebarCollapse"  (click)="clickEvent()">
             <h3 class="headtxt"> <i  class="fa fa-chevron-circle-left"></i> </h3>
             <strong><i  class="fa fa-chevron-circle-right"></i> </strong>
         </div>
@@ -72,18 +72,16 @@
   
         <ul class="list-unstyled CTAs">
             <li>
-                <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to Main Menu</a>
+                <a class="article" routerLink="../coordinator">Back to Main Menu</a>
             </li>
         </ul>
     </nav>
   
     <!-- Page Content  -->
     <div id="content">
-  
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-  
-                <button type="button" id="sidebarCollapse" class="btn btn-info sidebarCollapse navigat">
+                <button type="button" id="sidebarCollapse" class="btn btn-info sidebarCollapse navigat" (click)="clickEvent()">
                     <!-- <i class="fas fa-align-left"></i> -->
                     <i id="sidebarCollapse" class="fas fa-align-justify"></i>
                     <!-- <span>Toggle Sidebar</span> -->

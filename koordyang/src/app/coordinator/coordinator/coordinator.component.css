@@ -54,6 +54,7 @@
   }
   .buttonadd:hover{
     background-color:#e0a800; 
+    box-shadow: 0 0 11px rgba(33,33,33,.2); 
   }
 
   .cont{
@@ -61,4 +62,12 @@
   }
   .fas{
     font-size: 32px;
+  }
+  .card2{
+    background-color: whitesmoke;
+  }
+  .card2:hover{
+    background-color: white;
+    cursor: pointer;
+    box-shadow: 0 0 11px rgba(33,33,33,.2); 
   }

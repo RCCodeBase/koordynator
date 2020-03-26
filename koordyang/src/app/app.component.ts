@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import{ Location} from'@angular/common';
+import { AuthService }from './service/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -8,19 +8,11 @@ import{ Location} from'@angular/common';
 })
 export class AppComponent {
   title = 'KOORDYNATOR';
-  public nav = true;
 
-  constructor(location: Location){
+  constructor(public _authserv:AuthService){
     
   }
   ngOnInit() {
-    console.log(location.pathname);
-    if(location.pathname == '/'){
-      this.nav = true;
-    }
-    else{
-      this.nav = false;
-    }
   }
 
  

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {UserService} from '../../service/user.service';
 import { Router } from '@angular/router';
 import { DatashareService } from '../../service/datashare.service';
+import { AuthService }from '../../service/auth.service';
 
 @Component({
   selector: 'app-coordinator',
@@ -13,10 +14,11 @@ export class CoordinatorComponent implements OnInit {
   EventId = '';
   coordinatorEvents = [];
   events= ['TradeFair','Seminar','Conference']
-  constructor(private _EventAdd: UserService, private router: Router,private DatashareService: DatashareService) { }
+  constructor(private _EventAdd: UserService, private router: Router,private DatashareService: DatashareService,public _authserv:AuthService) { }
 
   ngOnInit() {
    this.onload();
+   localStorage.removeItem('Event-Id');
    //Add when loacl storage is not loading the data
   //  this.DatashareService.sharingEvent.subscribe(message => this.EventId = message)
   }
@@ -48,6 +50,14 @@ export class CoordinatorComponent implements OnInit {
         console.log(error);
       }
     )
+  }
+
+  onEdit(event)
+  {
+    console.log('Successfully Selected Event');
+    this.DatashareService.nextMessage(event._id);
+    this.router.navigate(['/events']);
+
   }
 
 }
