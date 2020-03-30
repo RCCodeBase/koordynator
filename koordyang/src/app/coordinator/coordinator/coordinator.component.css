@@ -71,3 +71,15 @@
     cursor: pointer;
     box-shadow: 0 0 11px rgba(33,33,33,.2); 
   }
+  .txt{
+    text-align: right;
+  }
+  .black{
+    background-color: black;
+  }
+.div1 {
+  float:left;
+}
+.div2{
+  float:right;
+}

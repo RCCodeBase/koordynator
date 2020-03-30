@@ -1,13 +1,13 @@
 const router = require('express').Router();
 const Coordinator = require('../models/coordinator.model');
 const bcrypt = require('bcryptjs');
-const { registerValidation } = require('./validation');
+const { registerValidationCoordinator } = require('./validation');
 
 //Creating new Coordinator
 router.post('/coordinator', async (req, res) => {
 
     //Validate the data before a user register
-    const { error } = registerValidation(req.body);
+    const { error } = registerValidationCoordinator(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
     //Checking if the user is already registered

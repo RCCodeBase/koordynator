@@ -1,42 +1,79 @@
-<p>participant works!</p>
 <table class="table">
-    <caption>List of users</caption>
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-      </tr>
-    </tbody>
-  </table>
-  <div class="container">
-<div class="row">
+  <caption>List of Participants</caption>
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Company</th>
+      <th scope="col">Card</th>
+      <!-- <th scope="col">Handle</th> -->
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor = "let participant of ParticipantDetails">
+      <!-- <th scope="row">1</th> -->
+      <td>{{participant.name}}</td>
+      <td>{{participant.email}}</td>
+      <td>{{participant.company}}</td>
+      <td><button type="button" class="btn btn-warning">Print</button></td>
+    </tr>
+  </tbody>
+</table>
+<div class="container">
+  <div class="row">
     <div class="col-lg-2">
-  <button type="submit" class="btn btn-warning">Add participant</button>
-</div>
-<div class="col-lg-2">
-  <button type="submit" class="btn btn-warning">Invite</button>
-</div>
-</div>
+      <button type="submit" class="btn btn-warning" data-toggle="modal" data-target="#addParticipant">Add
+        participant</button>
+    </div>
+    <div class="col-lg-2">
+      <button type="submit" class="btn btn-warning">Invite</button>
+    </div>
   </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addParticipant" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Participant</h5>
+        <button type="button" #closeButton class="close" data-dismiss="modal"  aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form class="register bg-blue" #user="ngForm">
+        <div class="modal-body">
+          <div *ngIf="ifError" class="alert alert-danger alert-dismissible fade show" (click)="onCloseErrorModal()" role="alert">
+            {{ errorMessage }}
+            <button type="button"   class="close" data-dismiss="alert" aria-label="Close" >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputName">Name</label>
+            <input type="text" class="form-control" id="exampleInputName" aria-describedby="nameHelp"
+              placeholder="Enter Name" name="name" ngModel required>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+              placeholder="Enter email" name="email" #email="ngModel"
+              [class.is-invalid]="email.invalid && email.touched" ngModel required>
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputCompany">Company Name</label>
+            <input type="text" class="form-control" id="exampleInputCompanyName" aria-describedby="comanyHelp"
+              placeholder="Company Name" name="company" ngModel>
+            <small id="emailHelp" class="form-text text-muted">(Not Mandatory)</small>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
+          <button type="submit" class="btn btn-warning"  (click)="onSubmit(user)" >Register</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

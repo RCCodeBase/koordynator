@@ -2,7 +2,7 @@
     <!-- Sidebar  -->
     <nav id="sidebar" [ngClass]="status ? 'active' : 'dec'">
    
-        <div id="navigatedesktop" class="sidebar-header sidebarCollapse"  (click)="clickEvent()">
+        <div id="navigatedesktop" class="sidebar-header sidebarCollapse"  (click)="navEvent()">
             <h3 class="headtxt"> <i  class="fa fa-chevron-circle-left"></i> </h3>
             <strong><i  class="fa fa-chevron-circle-right"></i> </strong>
         </div>
@@ -35,7 +35,7 @@
             <li>
                 
               <a href="#volunteersSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                <i class="fa fa-users"></i>
+                <i class="fas fa-user-tie"></i>
                 Volunteers
               </a>
               <!-- <ul class="collapse list-unstyled" id="volunteersSubmenu">
@@ -68,6 +68,12 @@
                     Invite
                 </a>
             </li>
+            <li>
+                <a href = ""(click)="_authserv.logoutUser()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Sign Out
+                </a>
+            </li>
         </ul>
   
         <ul class="list-unstyled CTAs">
@@ -81,11 +87,12 @@
     <div id="content">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-                <button type="button" id="sidebarCollapse" class="btn btn-info sidebarCollapse navigat" (click)="clickEvent()">
+                <button type="button" id="sidebarCollapse" class="btn btn-info sidebarCollapse navigat" (click)="navEvent()">
                     <!-- <i class="fas fa-align-left"></i> -->
                     <i id="sidebarCollapse" class="fas fa-align-justify"></i>
                     <!-- <span>Toggle Sidebar</span> -->
                 </button>
+                <h4>{{Event.Title}}</h4>
             </div>
         </nav>
         <router-outlet></router-outlet>

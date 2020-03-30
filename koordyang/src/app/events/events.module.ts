@@ -4,6 +4,7 @@ import { EventComponent } from './event/event.component';
 import { eventsRoutingModule } from './events-routing.module';
 import { ParticipantComponent } from './participant/participant.component';
 import { InviteComponent } from './invite/invite.component';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 
@@ -11,7 +12,9 @@ import { InviteComponent } from './invite/invite.component';
   declarations: [EventComponent, ParticipantComponent, InviteComponent],
   imports: [
     CommonModule,
-    eventsRoutingModule
+    eventsRoutingModule,    
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class EventsModule { }

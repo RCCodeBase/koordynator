@@ -9,7 +9,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
         </ul>
-
+        <a type="button" class="btn btn-warning link-btn" >Profile</a>
         <a type="button" class="btn btn-warning link-btn" (click)="_authserv.logoutUser()">Sign Out</a>
 
     </div>
@@ -17,19 +17,25 @@
 </nav>
 
 <div class="container cont">
-    <h2>Event</h2>
     <div class="card">
+        <div class="card-header">
+            <div class="div1">
+                <h2>Event</h2>
+            </div>
+            <div class="div2"> <a type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">Add
+                    Event</a></div>
+        </div>
         <div class="card-body">
             <!-- <div class="container">
                 <div class="row"> -->
             <div class="card-columns">
                 <div *ngFor="let event of coordinatorEvents">
-                    <div class="card card2" (click)="onEdit(event)" >
+                    <div class="card card2" (click)="onEdit(event)">
                         <img class="card-img-top" src="/assets/img/12.jpg" alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title">{{event.Title}}</h5>
                             <p class="card-text">{{event.Description}}</p>
-                            <a class="btn btn-warning" >Delete</a>
+                            <a class="btn btn-warning">Delete</a>
                         </div>
                     </div>
                 </div>
