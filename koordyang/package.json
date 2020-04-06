@@ -19,8 +19,10 @@
     "@angular/platform-browser": "~8.2.14",
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
+    "@zxing/ngx-scanner": "^3.0.0",
     "bootstrap": "^4.4.1",
     "jquery": "^3.4.1",
+    "pdfmake": "^0.1.65",
     "rxjs": "^6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"

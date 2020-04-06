@@ -5,16 +5,20 @@ import { eventsRoutingModule } from './events-routing.module';
 import { ParticipantComponent } from './participant/participant.component';
 import { InviteComponent } from './invite/invite.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { ScanComponent } from './scan/scan.component';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
+
 
 
 
 @NgModule({
-  declarations: [EventComponent, ParticipantComponent, InviteComponent],
+  declarations: [EventComponent, ParticipantComponent, InviteComponent, ScanComponent],
   imports: [
     CommonModule,
     eventsRoutingModule,    
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ZXingScannerModule
   ]
 })
 export class EventsModule { }

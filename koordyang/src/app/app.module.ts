@@ -16,6 +16,7 @@ import { SignupModule } from './signup/signup.module';
 import { CoordinatorModule } from './coordinator/coordinator.module';
 import { EventsModule } from './events/events.module';
 import { SigninComponent } from './signin/signin.component';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { SigninComponent } from './signin/signin.component';
     AppRoutingModule,
     SignupModule,
     CoordinatorModule,
-    EventsModule
+    EventsModule,
+    ZXingScannerModule
 
   ],
   providers: [AuthGuard, UserService, AuthService, DatashareService,
