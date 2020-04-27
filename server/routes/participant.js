@@ -34,6 +34,7 @@ router.post('/', verify,async (req, res) => {
 
 //Getting alll Particiapants of oneEvent
 router.get('/details',verify,async (req, res)=>{
+    console.log("Here",req.query.params);
     try {
         const participantDetails = await participant.find(
             { event: req.query.params },
@@ -44,6 +45,29 @@ router.get('/details',verify,async (req, res)=>{
       } catch (err) {
         res.json({ message: err });
       }
+});
+
+router.post('/saveParticipant',verify,async (req, res)=>{
+    const ParticipantPerson = new participant({
+        name: req.body.name,
+        email: req.body.email,
+        phoneno: req.body.Phoneno,
+        age: req.body.Age,
+        company : req.body.Company,
+        education:req.body.Education,
+        PaymentData:req.body.PaymentData,
+        address:req.body.address1,
+        event:req.body.eventid
+    });
+    try {
+        const savedParticipant = await ParticipantPerson.save();
+        res.json(savedParticipant);
+    }
+    catch (err) {
+        res.json({ message: err });
+    }
+
+
 });
 
 module.exports = router;

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService }from './service/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,10 +10,13 @@ import { AuthService }from './service/auth.service';
 export class AppComponent {
   title = 'KOORDYNATOR';
 
-  constructor(public _authserv:AuthService){
+  constructor(public authService:AuthService,private router: Router, ){
     
   }
   ngOnInit() {
+    if(this.authService.isLoggedIn){
+      this.router.navigate(['/coordinator']);
+    }
   }
 
  

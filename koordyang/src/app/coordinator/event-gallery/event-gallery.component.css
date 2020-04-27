@@ -1,0 +1,43 @@
+.buttonadd {
+  background-color: #2196f3;
+  border: none;
+  padding: 15px;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 32px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.buttonadd:hover {
+  background-color: #e0a800;
+  box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
+}
+
+.cont {
+  margin-top: 2%;
+}
+.fas {
+  font-size: 32px;
+}
+.card2 {
+  background-color: whitesmoke;
+}
+.card2:hover {
+  background-color: white;
+  cursor: pointer;
+  box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
+}
+.txt {
+  text-align: right;
+}
+.black {
+  background-color: black;
+}
+.div1 {
+  float: left;
+}
+.div2 {
+  float: right;
+}

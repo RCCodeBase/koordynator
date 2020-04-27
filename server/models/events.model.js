@@ -15,6 +15,10 @@ var eventSchema = mongoose.Schema({
     Volunteer:{
         type:String
     },
+    ParticipantSettings   : {
+        type:String,
+        required: false
+    },
     Coordinator:{
         type: mongoose.Schema.Types.ObjectId,
         ref: "coordinator"

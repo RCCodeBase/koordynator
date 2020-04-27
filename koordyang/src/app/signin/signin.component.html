@@ -1,7 +1,7 @@
 <div class="container h-100">
   <div class="row h-100 justify-content-center align-items-center">
 
-    <form  class="register col-lg-5 bg-blue" #userloginForm="ngForm" (ngSubmit)="onSubmit(userloginForm)" >
+    <form  class="register col-lg-5 bg-blue" #userloginForm="ngForm" (ngSubmit)="authService.SignIn(email.value, password.value)" >
       <div *ngIf="ifError" class="alert alert-danger alert-dismissible fade show" role="alert">
         {{ errorMessage }}
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -15,9 +15,29 @@
       </div>
       <div class="form-group">
         <label for="exampleInputPassword1">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password" ngModel required>
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password" #password="ngModel" ngModel required>
       </div>
       <button type="submit" class="btn btn-warning">Login</button>
+      <div class="forgotPassword">
+        <span class="btn text-warning" routerLink="/forgotpassword">Forgot Password?</span>
+      </div>
+      <hr class="new4">
+
+      <!-- Calling GoogleAuth Api from AuthService -->
+      <div class="formGroup">
+        <button type="button" class="btn btn-danger googleBtn" (click)="authService.AuthLogin()">
+          <i class="fab fa-google-plus-g"></i>
+          Log in with Google
+        </button>
+      </div>
+
+
+
+    <div class="redirectToLogin">
+      <span>Don't have an account?<span class="btn text-danger" routerLink="/signup"> Sign Up</span></span>
+    </div>
+
+
     </form>
 
   </div>

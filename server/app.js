@@ -7,7 +7,6 @@ const cors = require("cors");
 dotenv.config();
 
 //Import Routes
-const usersigupRoute = require("./routes/usersignup");
 const usersigninRoute = require("./routes/usersignin");
 const coordinatorEventRoute = require("./routes/coordinatorEvents");
 const eventsRoute = require("./routes/events");
@@ -24,7 +23,6 @@ app.use(
 app.use(express.json());
 
 //Adding middleware for routing
-app.use("/signup", usersigupRoute);
 app.use("/signin", usersigninRoute);
 app.use("/coordinator", coordinatorEventRoute);
 app.use("/events", eventsRoute);

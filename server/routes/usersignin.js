@@ -1,29 +1,26 @@
 const router = require('express').Router();
-const bcrypt = require('bcryptjs');
-const jwt =   require('jsonwebtoken');
 const Coordinator = require('../models/coordinator.model');
-const { loginValidation } = require('./validation');
+const verify = require("./verifytoken");
 
 //Creating new Coordinator
-router.post('/coordinator', async (req, res) => {
+router.get('/coordinator', verify,async (req, res) => {
 
-    //Validate the data before a user register
-    const { error } = loginValidation(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
+    const emailExist = await Coordinator.findOne({ email: req.user.email });
+    if (emailExist) return res.json('Already Registered Email');
 
-    //Checking if the user is already registered
-    const user = await Coordinator.findOne({ email: req.body.email });
-    if (!user) return res.status(400).send('Email is not registered');
+    const Coordinatorperson = new Coordinator({
+        UserId: req.user.uid,
+        email: req.user.email
+    });
+    try {
+        const savedCoordinator = await Coordinatorperson.save();
+        res.json(savedCoordinator);
+        // res.json('Logged In');
+    }
+    catch (err) {
+        res.json({ message: err });
+    }
 
-    //Checking Password
-    const validPass = await bcrypt.compare(req.body.password, user.password);
-    if (!validPass) return res.status(400).send('Password is not valid');
-
-    //create and assign a token
-    const Token = jwt.sign({_id: user.id}, process.env.TOKEN_SECRET);
-    res.setHeader('token',Token);
-    res.send();
-    // res.json('Logged In');
 
 });
 

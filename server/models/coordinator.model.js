@@ -2,19 +2,11 @@ const mongoose = require('mongoose');
 
 const CoordinatorSchema = mongoose.Schema({
 
-    name:{
+    UserId:{
         type:String,
-        required: true,
-        min: 6,
-        max: 255
+        required: true
     },
     email:{
-        type:String,
-        required: true,
-        min: 6,
-        max: 255
-    },
-    password:{
         type:String,
         required: true,
         min: 6,

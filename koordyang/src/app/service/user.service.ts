@@ -7,32 +7,23 @@ import { Observable } from "rxjs";
 })
 export class UserService {
   constructor(private _http: HttpClient) {}
-  //Registering Coordinator to the Database
-  registerCoordinator(coordinatorDetails) {
-    return this._http.post<any>(
-      "http://localhost:3000/signup/coordinator",
-      coordinatorDetails
-    );
-  }
 
-  //loginig in Coordinator
-  loginCoordinator(userLogin): Observable<HttpResponse<any>> {
-    return this._http.post<any>(
-      "http://localhost:3000/signin/coordinator",
-      userLogin,
-      { observe: "response", withCredentials: true }
+  //Cheking in Coordinator Details
+  async loginCoordinator() {
+     return await this._http.get<any>(
+      "http://localhost:3000/signin/coordinator"
     );
   }
 
   AddEvent(event) {
-    return this._http.post<any>(
+    return  this._http.post<any>(
       "http://localhost:3000/coordinator/event",
       event
     );
   }
 
-  loadEvent() {
-    return this._http.get<any>("http://localhost:3000/coordinator/event");
+   loadEvent() {
+     return this._http.get<any>("http://localhost:3000/coordinator/event");
   }
 
   //load one specific event to event page
@@ -54,4 +45,11 @@ export class UserService {
     const params = new HttpParams().set("params", Eventid);
     return this._http.get<any>("http://localhost:3000/participants/details", { params });
   }
+
+   addParticipanttoSetiings(Settings){
+     return this._http.post<any>("http://localhost:3000/events/settings", Settings);
+  }
+  saveParticipant(ParticipantDetails){
+    return this._http.post<any>("http://localhost:3000/participants/saveParticipant", ParticipantDetails);
+ }
 }

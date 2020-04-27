@@ -2,25 +2,41 @@ import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { SignupComponent } from './signup/signup/signup.component';
-import { CoordinatorComponent } from './coordinator/coordinator/coordinator.component';
 import { SigninComponent } from './signin/signin.component';
-import { AuthGuard } from './auth.guard';
+import { VerificationmailComponent } from './verificationmail/verificationmail.component';
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
+import { ParticipantComponent } from './participant/participant.component';
+
+// Import canActivate guard services
+import { AuthGuard } from './guard/auth.guard';
+import { SecureInnerPagesGuard } from './guard/secure-inner-pages.guard';
 
 
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent
+    component: HomeComponent,
+    canActivate: [SecureInnerPagesGuard]
   },{
     path: 'signup',
-    component: SignupComponent
-  },{
-    path: 'coordinator',
-    component: CoordinatorComponent,
-    canActivate:[AuthGuard]
+    component: SignupComponent,
+    canActivate: [SecureInnerPagesGuard]
   },{
     path:'signin',
-    component:SigninComponent
+    component:SigninComponent,
+    canActivate: [SecureInnerPagesGuard]
+  },{
+    path:'verificationMail',
+    component:VerificationmailComponent,
+    canActivate: [SecureInnerPagesGuard]
+  },{
+    path:'forgotpassword',
+    component:ForgotpasswordComponent,
+    canActivate: [SecureInnerPagesGuard]
+  }
+  ,{
+    path:'participant',
+    component:ParticipantComponent
   }
 ];
 

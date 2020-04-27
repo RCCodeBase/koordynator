@@ -6,13 +6,14 @@ const verify = require("./verifytoken");
 
 //Creating new event by coordinator
 router.post("/event", verify, async (req, res) => {
-  console.log(req.body.EventType);
+  const user =  await Coordinator.findOne({ email: req.user.email });
+  console.log("Logging user details from database",user);
   const event = new events({
     Title: req.body.Title,
     EventType: req.body.EventType,
     Description: req.body.Description,
     Volunteer: req.body.volunteer,
-    Coordinator: req.user._id
+    Coordinator: user._id
   });
   try {
     const savedCoordinator = await event.save();
@@ -24,9 +25,10 @@ router.post("/event", verify, async (req, res) => {
 
 //Sending Event Details to the coordinator page
 router.get("/event", verify, async (req, res) => {
+  const user =  await Coordinator.findOne({ email: req.user.email });
   try {
     const eventsCoord = await events.find(
-      { Coordinator: req.user._id },
+      { Coordinator: user._id },
       { _id: 1, Title: 1, EventType: 1, Description: 1, Volunteer: 1 }
     );
     res.json(eventsCoord);
@@ -34,4 +36,5 @@ router.get("/event", verify, async (req, res) => {
     res.json({ message: err });
   }
 });
+
 module.exports = router;

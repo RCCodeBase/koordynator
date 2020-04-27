@@ -17,7 +17,7 @@ export class EventComponent implements OnInit {
     private router: Router,
     private DatashareService: DatashareService,
     private _EventAdd: UserService,
-    private _authserv:AuthService
+    private authService:AuthService
   ) {}
 
   ngOnInit() {

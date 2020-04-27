@@ -1,7 +1,7 @@
 <!-- Navigation -->
 <nav class="navbar  navbar-default navbar-expand-lg navbar-light">
 
-    <a class="navbar-brand" href="#">KOORDYNATOR</a>
+    <a class="navbar-brand" routerLink="/coordinator">KOORDYNATOR</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="Toogleico"></span> Menu <i class="fa fa-bars"></i>
@@ -9,98 +9,11 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
         </ul>
-        <a type="button" class="btn btn-warning link-btn" >Profile</a>
-        <a type="button" class="btn btn-warning link-btn" (click)="_authserv.logoutUser()">Sign Out</a>
+        <a type="button" class="btn btn-warning link-btn" routerLink="profile" >Profile</a>
+        <a type="button" class="btn btn-warning link-btn" (click)="authService.SignOut()">Sign Out</a>
 
     </div>
 
 </nav>
 
-<div class="container cont">
-    <div class="card">
-        <div class="card-header">
-            <div class="div1">
-                <h2>Event</h2>
-            </div>
-            <div class="div2"> <a type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">Add
-                    Event</a></div>
-        </div>
-        <div class="card-body">
-            <!-- <div class="container">
-                <div class="row"> -->
-            <div class="card-columns">
-                <div *ngFor="let event of coordinatorEvents">
-                    <div class="card card2" (click)="onEdit(event)">
-                        <img class="card-img-top" src="/assets/img/12.jpg" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">{{event.Title}}</h5>
-                            <p class="card-text">{{event.Description}}</p>
-                            <a class="btn btn-warning">Delete</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card buttonadd" data-toggle="modal" data-target="#myModal">
-                    <i class="fas fa-plus-circle"></i><br /> Add
-                </div>
-            </div>
-            <!-- </div>
-            </div> -->
-
-        </div>
-    </div>
-</div>
-
-
-
-
-<!-- The Modal for adding new Event -->
-<div class="modal fade" id="myModal">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">Event Details</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <form #userloginForm="ngForm">
-                <!-- Modal body -->
-
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="form-group">
-                            <label for="exampleInputName">Event Name</label>
-                            <input type="text" class="form-control" id="exampleInputName" aria-describedby="nameHelp"
-                                placeholder="Title" name="Title" ngModel required>
-                        </div>
-                        <div class="form-group">
-                            <label for="comment">Description:</label>
-                            <textarea class="form-control" rows="3" maxlength="100" id="Description"
-                                placeholder="Description about event in minimum words" name="Description" ngModel
-                                required></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="Event Type">Select Event Type</label>
-                            <select name="EventType" id="event" class="form-control" ngModel>
-                                <option *ngFor="let event of events">{{event}}</option>
-                            </select>
-                        </div>
-                        <div class="form-check">
-                            <input type="checkbox" name="volunteer" class="form-check-input" ngModel>
-                            <label for="" class="form-check-label">
-                                Please Select options if volunteers needed:
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-warning" data-dismiss="modal"
-                        (click)="onSubmit(userloginForm)">Submit</button>
-                </div>
-            </form>
-
-        </div>
-    </div>
-</div>
+<router-outlet></router-outlet>

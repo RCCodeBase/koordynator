@@ -1,22 +1,160 @@
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
+import { auth } from "firebase";
+import { AngularFireAuth } from "@angular/fire/auth";
+import { User } from "../service/user";
+import { UserService } from "./user.service";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class AuthService {
-  constructor(private router:Router) { }
-//for Auth Guard for not access page for loggedin user
-//for checking login and logout
-  loggedIn(){
-    return !!localStorage.getItem('auth-token');
-  }
-  getToken(){
-    return localStorage.getItem('auth-token');
+  userData: any; // Save logged in user data
 
+  constructor(
+    public afAuth: AngularFireAuth, // Inject Firebase auth service
+    public router: Router,
+    private userservice: UserService
+  ) {
+    /* Saving user data in localstorage when 
+      logged in and setting up null when logged out */
+    this.afAuth.authState.subscribe((user) => {
+      if (user) {
+        this.userData = user;
+        localStorage.setItem("user", JSON.stringify(this.userData));
+        JSON.parse(localStorage.getItem("user"));
+      } else {
+        localStorage.setItem("user", null);
+        JSON.parse(localStorage.getItem("user"));
+      }
+    });
   }
-  logoutUser(){
-    localStorage.clear();
-    this.router.navigate(['/signin']);
+  //for Auth Guard for not access page for loggedin user
+  //for checking login and logout
+
+  // Sign in with email/password
+  SignIn(email, password) {
+    return this.afAuth
+      .signInWithEmailAndPassword(email, password)
+      .then((result) => {
+        this.SetUserData(result.user);
+        this.SetttingTokenForSendingRequest(result.user);
+      })
+      .catch((error) => {
+        window.alert(error.message);
+      });
+  }
+
+  // Sign up with email/password
+  SignUp(email, password) {
+    return this.afAuth
+      .createUserWithEmailAndPassword(email, password)
+      .then((result) => {
+        /* Call the SendVerificaitonMail() function when new user sign 
+          up and returns promise */
+        this.SendVerificationMail(result.user);
+        this.SetUserData(result.user);
+      })
+      .catch((error) => {
+        window.alert(error.message);
+      });
+  }
+
+  // Send email verfificaiton when new user sign up
+  SendVerificationMail(currentUser) {
+    currentUser.sendEmailVerification().then(() => {
+      this.router.navigate(["/verificationMail"]);
+    });
+  }
+
+  // Reset Forggot password
+  ForgotPassword(passwordResetEmail) {
+    return this.afAuth
+      .sendPasswordResetEmail(passwordResetEmail)
+      .then(() => {
+        window.alert("Password reset email sent, check your inbox.");
+        this.router.navigate(["signin"]);
+      })
+      .catch((error) => {
+        window.alert(error);
+      });
+  }
+
+  // Returns true when user is looged in and email is verified
+  get isLoggedIn(): boolean {
+    const user = JSON.parse(localStorage.getItem("user"));
+    return user !== null && user.emailVerified !== false ? true : false;
+  }
+
+  //Getting Token For auterization and send token through requests
+  SetttingTokenForSendingRequest(currentUser) {
+    currentUser
+      .getIdToken(/* forceRefresh */ true)
+      .then((idToken) => {
+        localStorage.setItem("auth-token", idToken);
+        //Naviagting to the coordinator page
+        this.router.navigate(["/coordinator"]);
+      })
+      .catch(function (error) {
+        console.log(error.error);
+      });
+  }
+
+  // Auth logic to run auth providers
+  AuthLogin() {
+    const provider = new auth.GoogleAuthProvider();
+    return this.afAuth
+      .signInWithPopup(provider)
+      .then(async (result) => {
+        this.SetttingTokenForSendingRequest(result.user);
+        this.SetUserData(result.user);
+      })
+      .catch((error) => {
+        window.alert(error);
+      });
+  }
+
+  //Commented for Checking later
+  // gettingAuthToken() {
+  //   this.afAuth.authState.subscribe((user) => {
+  //     if (user) {
+  //       user
+  //         .getIdToken(/* forceRefresh */ true)
+  //         .then((idToken) => {
+  //           return idToken;
+  //         })
+  //         .catch(function (error) {
+  //           console.log(error.error);
+  //         });
+  //     }
+  //   });
+  //   return null;
+  // }
+
+  /* Setting up user data when sign in with username/password, 
+  sign up with username/password and sign in with social auth  
+  provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
+  SetUserData(user) {
+    const userData: User = {
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+      emailVerified: user.emailVerified,
+    };
+    return userData;
+  }
+
+  // Sign out
+  SignOut() {
+    return this.afAuth.signOut().then(() => {
+      localStorage.clear();
+      this.router.navigate(["/signin"]);
+    });
+  }
+
+  //Getting Token to the tokenInterceptor
+  getToken() {
+    return localStorage.getItem("auth-token");
   }
 }
