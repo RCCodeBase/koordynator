@@ -1,6 +1,12 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { UserService } from "../../service/user.service";
-import { FormBuilder, FormGroup, FormArray, FormControl } from "@angular/forms";
+import {
+  FormBuilder,
+  FormGroup,
+  FormArray,
+  FormControl,
+  Validators,
+} from "@angular/forms";
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import { DatashareService } from "../../service/datashare.service";
@@ -13,11 +19,11 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
   styleUrls: ["./participant.component.css"],
 })
 export class ParticipantComponent implements OnInit {
-  @ViewChild("closeButton", { static: true }) private closeButton: ElementRef;
-  ParticipantDetails ;
+  @ViewChild("closeButton", { static: true }) public closeButton: ElementRef;
+  ParticipantDetails;
   ParticipantArr = [];
   ParticpantPrint = [];
-  
+
   headers = ["name", "email"];
   participantNull;
   ifError = false;
@@ -35,6 +41,11 @@ export class ParticipantComponent implements OnInit {
     { name: "Id Proof", value: "IdProof" },
   ];
   form: FormGroup;
+
+  dynamicForm: FormGroup;
+  submitted = false;
+  numberOfParticipants ;
+
   constructor(
     private _Participant: UserService,
     private fb: FormBuilder,
@@ -49,6 +60,19 @@ export class ParticipantComponent implements OnInit {
       PaymentRequired: new FormControl(""),
       Amount: new FormControl(""),
     });
+
+    this.dynamicForm = this.fb.group({
+      numberOfParticipant: ['', Validators.required],
+      tickets: new FormArray([]),
+    });
+  }
+
+  // convenience getters for easy access to form fields
+  get f() {
+    return this.dynamicForm.controls;
+  }
+  get t() {
+    return this.f.tickets as FormArray;
   }
 
   AllEventParticipant() {
@@ -67,7 +91,7 @@ export class ParticipantComponent implements OnInit {
             (data) => {
               console.log("Loading Participants", data);
               this.ParticipantDetails = JSON.stringify(data);
-              
+
               if (data.length == 0) {
                 this.participantNull = false;
               } else {
@@ -75,7 +99,7 @@ export class ParticipantComponent implements OnInit {
                 console.log("Here3");
                 this.participantNull = true;
                 this.ParticipantArr = JSON.parse(this.ParticipantDetails);
-                console.log(this.ParticipantArr );
+                console.log(this.ParticipantArr);
               }
             },
             (error) => {
@@ -182,6 +206,7 @@ export class ParticipantComponent implements OnInit {
     this._Participant.addParticipanttoSetiings(DataSend).subscribe(
       (data) => {
         console.log(data);
+        this.router.navigate(["/participant"]);
       },
       (error) => {
         console.log(error.error);
@@ -198,5 +223,79 @@ export class ParticipantComponent implements OnInit {
   }
   changeRoute() {
     this.router.navigate(["/participant"]);
+  }
+
+  
+  onChangeParticipants(e) {
+    this.numberOfParticipants = e.target.value || 0;
+    if (this.t.length < this.numberOfParticipants) {
+      for (let i = this.t.length; i < this.numberOfParticipants; i++) {
+        this.t.push(
+          this.fb.group({
+            email: ["", [Validators.required, Validators.email]],
+          })
+        );
+      }
+    } else {
+      for (let i = this.t.length; i >= this.numberOfParticipants; i--) {
+        this.t.removeAt(i);
+      }
+    }
+  }
+
+
+  //Sending Mail to Mail reciptants
+  sendingMail() {
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.dynamicForm.invalid) {
+      return;
+    }
+
+    // display form values on success
+    // alert(
+    //   "SUCCESS!! :-)\n\n" + JSON.stringify(this.dynamicForm.value, null, 4)
+    // );
+    let email = this.dynamicForm.value.tickets;
+    let emailstring = new Array;
+    for (let i = 0; i < this.numberOfParticipants; i++) {
+      emailstring[i] = email[i]["email"];
+    }
+    const EventId = localStorage.getItem("Event-Id");
+
+    //Creating Json for Sensing Mail with URL
+    var sendData = {
+      mail:emailstring.join(","),
+      url : "http://localhost:4200/participant/" + EventId
+    }
+
+    this._Participant.sendingMail(sendData).subscribe(
+      (data) => {
+            alert(data);
+            this.router.navigate(["/events"]);
+            this.closeButton.nativeElement.click();
+        console.log(data);
+      },
+      (error) => {
+        alert(error.error);
+      }
+    );
+    console.log("data of email",emailstring.join(","));
+
+    console.log("Going to Send Mail");
+  }
+
+  onReset() {
+    // reset whole form back to initial state
+    this.submitted = false;
+    this.dynamicForm.reset();
+    this.t.clear();
+  }
+
+  onClear() {
+    // clear errors and reset ticket fields
+    this.submitted = false;
+    this.t.reset();
   }
 }

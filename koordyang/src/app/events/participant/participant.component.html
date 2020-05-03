@@ -14,8 +14,7 @@
     <hr>
     <h6>Payment if Required for Registeration of Participant</h6>
     <label>
-      <input type="checkbox" #chckEnable formControlName="PaymentRequired" ngModel
-        value="Payment" />
+      <input type="checkbox" #chckEnable formControlName="PaymentRequired" ngModel value="Payment" />
       Payment Required
     </label>
     <div>Amout to Be Paid:
@@ -51,7 +50,7 @@
         <tr>
           <th scope="col">Name</th>
           <th scope="col">Email</th>
-          <th scope="col"  *ngIf="this.partipantinput.includes('Company')">Company</th>
+          <th scope="col" *ngIf="this.partipantinput.includes('Company')">Company</th>
           <th scope="col">Card</th>
           <!-- <th scope="col">Handle</th> -->
         </tr>
@@ -62,7 +61,7 @@
           <!-- <th scope="row">1</th> -->
           <td>{{part.name}}</td>
           <td>{{part.email}}</td>
-          <td *ngIf="this.partipantinput.includes('Company')" >{{part.company}}</td>
+          <td *ngIf="this.partipantinput.includes('Company')">{{part.company}}</td>
           <td><button type="button" class="btn btn-warning" (click)="onPrint(part)">Print</button></td>
         </tr>
       </tbody>
@@ -73,23 +72,21 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-2">
-        <button type="submit" class="btn btn-warning" data-toggle="modal" data-target="#addParticipant">Add
-          participant</button>
+        <button type="submit" class="btn btn-warning" data-toggle="modal" data-target="#addingInvite">Invite</button>
       </div>
       <div class="col-lg-2">
-        <button type="submit" class="btn btn-warning">Invite</button>
+        <button type="submit" class="btn btn-warning" (click)="changeRoute()">Add
+          participant</button>
       </div>
-      <button type="submit" class="btn btn-warning" (click)="changeRoute()">Add
-        participant</button>
     </div>
   </div>
 
 </ng-template>
 
 
-
-<!-- Modal for adding Particpant-->
-<div class="modal fade" id="addParticipant" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<!-- Modal For adding Email and send invitation -->
+<!-- Modal for sending invitation invites-->
+<div class="modal fade" id="addingInvite" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -99,7 +96,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form class="register bg-blue" #user="ngForm">
+      <form [formGroup]="dynamicForm" (ngSubmit)="sendingMail()">
         <div class="modal-body">
           <div *ngIf="ifError" class="alert alert-danger alert-dismissible fade show" (click)="onCloseErrorModal()"
             role="alert">
@@ -108,28 +105,43 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="form-group">
-            <label for="exampleInputName">Name</label>
-            <input type="text" class="form-control" id="exampleInputName" aria-describedby="nameHelp"
-              placeholder="Enter Name" name="name" ngModel required>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Number of Participants</label>
+              <select formControlName="numberOfParticipant" class="form-control" (change)="onChangeParticipants($event)"
+                [ngClass]="{ 'is-invalid': submitted && f.numberOfParticipant.errors }">
+                <option value=""></option>
+                <option *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">{{i}}</option>
+              </select>
+              <div *ngIf="submitted && f.numberOfParticipant.errors" class="invalid-feedback">
+                <div *ngIf="f.numberOfParticipant.errors.required">Number of tickets is required</div>
+              </div>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-              placeholder="Enter email" name="email" #email="ngModel"
-              [class.is-invalid]="email.invalid && email.touched" ngModel required>
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+
+          <div *ngFor="let ticket of t.controls; let i = index" class="list-group list-group-flush">
+            <div class="list-group-item">
+              <h5 class="card-title">Participant {{i + 1}}</h5>
+              <div [formGroup]="ticket" class="form-row">
+                <div class="form-group col-10">
+                  <label>Email</label>
+                  <input type="text" formControlName="email" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && ticket.controls.email.errors }" />
+                  <div *ngIf="submitted && ticket.controls.email.errors" class="invalid-feedback">
+                    <div *ngIf="ticket.controls.email.errors.required">Email is required</div>
+                    <div *ngIf="ticket.controls.email.errors.email">Email must be a valid email address</div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="form-group" *ngFor="let inputdat of partipantinput; let i = index" >
-            <label>{{ inputdat}}</label>
-            <!-- <input type="text" class="form-control" id="exampleInputCompanyName" aria-describedby="comanyHelp"
-              placeholder="Company Name" name="company" ngModel>
-            <small id="emailHelp" class="form-text text-muted">(Not Mandatory)</small> -->
+
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-warning" >Sent</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-warning" (click)="onReset()">Reset</button>
+            <button class="btn btn-warning" type="button" (click)="onClear()">Clear</button>
           </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-warning" (click)="onSubmit(user)">Register</button>
         </div>
       </form>
     </div>

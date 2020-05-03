@@ -34,7 +34,11 @@ const routes: Routes = [
     component:ForgotpasswordComponent,
     canActivate: [SecureInnerPagesGuard]
   }
-  ,{
+  ,
+  {
+    path:'participant/:eventid',
+    component:ParticipantComponent
+  },{
     path:'participant',
     component:ParticipantComponent
   }

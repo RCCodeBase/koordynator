@@ -18,7 +18,10 @@ export class EventComponent implements OnInit {
     private DatashareService: DatashareService,
     private _EventAdd: UserService,
     private authService:AuthService
-  ) {}
+  ) {
+
+  
+  }
 
   ngOnInit() {
     if (localStorage.getItem("Event-Id") === null) {

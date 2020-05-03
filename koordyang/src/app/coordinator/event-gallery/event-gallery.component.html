@@ -12,7 +12,7 @@
                 <div class="row"> -->
             <div class="card-columns">
                 <div *ngFor="let event of coordinatorEvents">
-                    <div class="card card2" (click)="onEdit(event)">
+                    <div class="card card2 " (click)="onEdit(event)">
                         <img class="card-img-top" src="/assets/img/12.jpg" alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title">{{event.Title}}</h5>
@@ -21,9 +21,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="card buttonadd" data-toggle="modal" data-target="#myModal">
+                <!-- <div class="card buttonadd" data-toggle="modal" data-target="#myModal">
                     <i class="fas fa-plus-circle"></i><br /> Add
-                </div>
+                </div> -->
             </div>
             <!-- </div>
             </div> -->

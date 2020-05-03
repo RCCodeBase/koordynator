@@ -96,7 +96,7 @@
                             <h4>Amout to be paid for Registeration {{Amount}} </h4>
                             <div class="form-group">
                                 <label >Select Payment Method</label>
-                                <select name="paymentMeth" id="paymentMeth" class="form-control" #paymentMeth="ngModel" [(ngModel)]="selectedOption">
+                                <select name="paymentMeth" id="paymentMeth" class="form-control" #paymentMeth="ngModel" (change)="ChangingMethod($event.target.value)" [(ngModel)]="selectedOption">
                                     <option *ngFor="let method of paymentMethod">{{method}}</option>
                                 </select>
                             </div>
@@ -111,7 +111,8 @@
 
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-warning" data-dismiss="modal" (click)="savingParticipant(participantForm)">Submit</button>
+                    <button type="submit" class="btn btn-warning" data-dismiss="modal" *ngIf="ToggleButton" (click)="paymentandSaving(participantForm)">Proceed</button>
+                    <button type="submit" class="btn btn-warning" data-dismiss="modal" *ngIf="!ToggleButton" (click)="savingParticipant(participantForm)">Submit</button>
                 </div>
             </form>
 

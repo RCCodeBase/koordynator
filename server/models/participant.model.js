@@ -27,6 +27,9 @@ var participantSchema = mongoose.Schema({
   address:{
     type: String,
   },
+  paymentId:{
+    type: String,
+  },
   event: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "events",
