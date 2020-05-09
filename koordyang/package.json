@@ -23,7 +23,7 @@
     "@zxing/ngx-scanner": "^3.0.0",
     "bootstrap": "^4.4.1",
     "firebase": "^7.13.2",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "ngx-spinner": "^9.0.2",
     "pdfmake": "^0.1.65",
     "rxjs": "^6.4.0",
