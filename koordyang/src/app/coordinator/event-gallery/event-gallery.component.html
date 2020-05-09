@@ -8,8 +8,6 @@
                     Event</a></div>
         </div>
         <div class="card-body">
-            <!-- <div class="container">
-                <div class="row"> -->
             <div class="card-columns">
                 <div *ngFor="let event of coordinatorEvents">
                     <div class="card card2 " (click)="onEdit(event)">
@@ -21,12 +19,11 @@
                         </div>
                     </div>
                 </div>
+                <!-- Adding Add Button if needed to add -->
                 <!-- <div class="card buttonadd" data-toggle="modal" data-target="#myModal">
                     <i class="fas fa-plus-circle"></i><br /> Add
                 </div> -->
             </div>
-            <!-- </div>
-            </div> -->
 
         </div>
     </div>
@@ -63,8 +60,8 @@
                         </div>
                         <div class="form-group">
                             <label for="Event Type">Select Event Type</label>
-                            <select name="EventType" id="event" class="form-control" ngModel>
-                                <option *ngFor="let event of events">{{event}}</option>
+                            <select name="EventType" id="event" class="form-control" [(ngModel)]="eventCategory">
+                                <option [value]="event" *ngFor="let event of events">{{event}}</option>
                             </select>
                         </div>
                         <div class="form-check">
@@ -73,6 +70,28 @@
                                 Please Select options if volunteers needed:
                             </label>
                         </div>
+                     
+                        <div class="card cont">
+                            <div class="card-header">Activites Needed to be tracked</div>
+                            <div class="card-body">
+                                <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                      <input type="checkbox" name="InParticipant"  #InParticipant class="form-check-input"  ngModel>In Participant
+                                    </label>
+                                  </div>
+                                  <div class="form-check-inline" *ngIf="InParticipant.checked">
+                                    <label class="form-check-label">
+                                      <input type="checkbox" name="OutParticipant"  class="form-check-input" ngModel>Out Participant
+                                    </label>
+                                  </div>
+                                  <div class="form-check-inline" *ngIf="eventCategory == 'Seminar'">
+                                    <label class="form-check-label">
+                                      <input type="checkbox" name="FoodCoupon" class="form-check-input"  ngModel>Food Coupon
+                                    </label>
+                                  </div>
+                     
+                          </div>
+                          </div>
                     </div>
                 </div>
 

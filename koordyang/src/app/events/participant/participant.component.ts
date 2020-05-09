@@ -140,6 +140,7 @@ export class ParticipantComponent implements OnInit {
   //For printing the detaills
   onPrint(participant) {
     this.ParticpantPrint = participant;
+    console.log(this.ParticpantPrint["_id"]); 
     const documentDefinition = this.getDocumentDefinition();
     pdfMake.createPdf(documentDefinition).open({}, window);
   }
@@ -155,7 +156,7 @@ export class ParticipantComponent implements OnInit {
           alignment: "center",
           margin: [0, 0, 0, 20],
         },
-        { qr: "localhost" },
+        { qr: "/Activities/" + this.ParticpantPrint["_id"] },
         {
           columns: [
             [

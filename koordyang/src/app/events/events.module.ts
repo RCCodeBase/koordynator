@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup, FormArray, FormControl, Validators ,ReactiveFor
 import { ScanComponent } from './scan/scan.component';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { NumberDirective } from '../numbers-only.directive';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 
 
@@ -19,7 +20,8 @@ import { NumberDirective } from '../numbers-only.directive';
     eventsRoutingModule,    
     FormsModule,
     ReactiveFormsModule,
-    ZXingScannerModule
+    ZXingScannerModule,
+    NgxSpinnerModule
   ]
 })
 export class EventsModule { }

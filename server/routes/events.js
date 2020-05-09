@@ -5,7 +5,7 @@ const events = require("../models/events.model");
 const verify = require("./verifytoken");
 var nodemailer = require("nodemailer");
 
-//Sending Event details without loggined user
+//Sending Event details with loggined user
 router.get("/", verify, async (req, res) => {
   try {
     const event = await events.findOne({ _id: req.query.params });
@@ -25,7 +25,7 @@ router.get("/anonymous", async (req, res) => {
   }
 });
 
-//Creating new event by coordinator
+//Creating new event Settings of Participant by coordinator
 router.post("/settings", verify, async (req, res) => {
   console.log("Eventid:", req.body.Eventid);
   console.log("ParticipantDetails:", req.body.ParticipantSetting);
@@ -43,7 +43,8 @@ router.post("/inviteOthers", verify, async (req, res) => {
     service: "gmail",
     auth: {
       user: "rahultdpz143@gmail.com",
-      pass: "949504862",
+      // Add Password Here
+      pass: "",
     },
   });
 

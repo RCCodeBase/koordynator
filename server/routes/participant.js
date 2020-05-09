@@ -36,7 +36,7 @@ router.get("/details", verify, async (req, res) => {
   try {
     const participantDetails = await participant.find(
       { event: req.query.params },
-      { name: 1, email: 1, company: 1 }
+      { _id:1,name: 1, email: 1, company: 1 }
     );
 
     res.json(participantDetails);
@@ -44,6 +44,22 @@ router.get("/details", verify, async (req, res) => {
     res.json({ message: err });
   }
 });
+
+//Getting details of one Particiapants of oneEvent
+router.get("/onedetails", verify, async (req, res) => {
+  console.log("Here", req.query.params);
+  try {
+    const participantDetails = await participant.findOne(
+      { _id: req.query.params },
+      { _id:1,name: 1, email: 1, company: 1,event: 1 }
+    );
+
+    res.json(participantDetails);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
+
 
 //Saving Participant Details
 router.post("/saveParticipant", verify, async (req, res) => {

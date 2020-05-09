@@ -11,6 +11,7 @@ const usersigninRoute = require("./routes/usersignin");
 const coordinatorEventRoute = require("./routes/coordinatorEvents");
 const eventsRoute = require("./routes/events");
 const participantsRoute = require("./routes/participant");
+const activitieRoute = require("./routes/activities");
 
 app.use(
   cors({
@@ -27,6 +28,7 @@ app.use("/signin", usersigninRoute);
 app.use("/coordinator", coordinatorEventRoute);
 app.use("/events", eventsRoute);
 app.use("/participants", participantsRoute);
+app.use("/activities", activitieRoute);
 
 //Connect to DB
 mongoose

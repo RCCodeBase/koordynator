@@ -157,4 +157,5 @@ export class AuthService {
   getToken() {
     return localStorage.getItem("auth-token");
   }
+
 }

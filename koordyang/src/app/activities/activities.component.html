@@ -1,0 +1,59 @@
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#2196F3" type="ball-scale-multiple">
+    <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
+<!-- <div class="container h-100">
+    <div class="row h-100 justify-content-center align-items-center">
+        <div class="col-12">
+            <div class="card card-inverse" style="background-color: whitesmoke; border-color: #333;">
+                <div class="card-block">
+                    <div class="row">
+                        <div class="col-md-8 col-sm-8">
+                            <p class="card-title">Name :{{ParticipantDetails.name}} </p>
+                            <p class="card-text"><strong>Email:{{ParticipantDetails.email}} </strong> </p>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4 col-sm-4 text-center">
+                                <button class="btn btn-primary btn-block btn-lg"
+                                    *ngIf="this.eventActivities.includes('InParticipant')"><span
+                                        class="fa fa-facebook-square"></span>
+                                    InParticipant </button>
+                            </div>
+                            <div class="col-md-4 col-sm-4 text-center">
+
+                                <button class="btn btn-success btn-block btn-lg"
+                                    *ngIf="this.eventActivities.includes('OutParticipant')"><span
+                                        class="fa fa-twitter-square"></span>
+                                    OutParticipant </button>
+                            </div>
+                            <div class="col-md-4 col-sm-4 text-center">
+                                <button type="button" class="btn btn-danger btn-block btn-lg"><span
+                                        class="fa fa-google-plus-square"></span> Follow </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<div class="container h-100">
+    <div class="row h-100 justify-content-center align-items-center">
+        <div class="col-8">
+        <div class="card">
+            <div class="card-header">
+              Participant
+            </div>
+            <div class="card-body">
+              <p class="card-text">Name :{{ParticipantDetails.name}}</p>
+              <p class="card-text">Email:{{ParticipantDetails.email}}</p>
+              <h2 class="card-text" *ngIf="ButtonShow == 'InOutDone'" > Participant Gone</h2>
+              <button type="button" class="btn btn-primary" *ngIf="this.eventActivities.includes('InParticipant')"  [disabled]="ButtonShow != 'Inparticipant'" (click)="ParticipantIN()">InParticipant</button>
+              <button type="button" class="btn btn-success"  *ngIf="this.eventActivities.includes('OutParticipant')" [disabled]="ButtonShow != 'Outpatrticipant'"  (click)="ParticipantOut()" >OutParticipant</button>
+              <button type="button" class="btn btn-warning" *ngIf="this.eventActivities.includes('FoodCoupon')" [disabled]="FoodShow != 'FoodCoupon'"  (click)="FoodCoupon()" >Food Coupon</button>
+            </div>
+          </div>
+          </div>
+    </div>
+</div>

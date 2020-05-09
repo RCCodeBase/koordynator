@@ -1,12 +1,12 @@
 <!-- Navigation -->
-<nav *ngIf="!authService.isLoggedIn" class="navbar  navbar-default navbar-expand-lg navbar-light fixed-top">
+<nav *ngIf="!authService.isLoggedIn " class="navbar  navbar-default navbar-expand-lg navbar-light fixed-top">
 
-  <a class="navbar-brand">KOORDYNATOR</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+  <a *ngIf="Navbardisp" class="navbar-brand">KOORDYNATOR</a>
+  <button *ngIf="Navbardisp" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="Toogleico"></span> Menu <i class="fa fa-bars"></i>
   </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <div *ngIf="Navbardisp" class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
         <a class="nav-link" href="#about">About</a>

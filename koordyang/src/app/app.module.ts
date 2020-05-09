@@ -1,12 +1,13 @@
-import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
+import { BrowserModule} from "@angular/platform-browser";
+import { NgModule} from "@angular/core";
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators , ReactiveFormsModule,FormsModule } from "@angular/forms";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { ZXingScannerModule } from "@zxing/ngx-scanner";
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
-
+import { NgxSpinnerModule } from "ngx-spinner";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { environment } from "../environments/environment";
 import { UserService } from "./service/user.service";
@@ -24,6 +25,7 @@ import { SigninComponent } from "./signin/signin.component";
 import { VerificationmailComponent } from "./verificationmail/verificationmail.component";
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { ParticipantComponent } from './participant/participant.component';
+import { ActivitiesComponent } from './activities/activities.component';
 
 @NgModule({
   declarations: [
@@ -32,11 +34,13 @@ import { ParticipantComponent } from './participant/participant.component';
     SigninComponent,
     VerificationmailComponent,
     ForgotpasswordComponent,
-    ParticipantComponent
+    ParticipantComponent,
+    ActivitiesComponent
   ],
   imports: [
     ReactiveFormsModule,
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
@@ -47,6 +51,7 @@ import { ParticipantComponent } from './participant/participant.component';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    NgxSpinnerModule
   ],
   providers: [
     UserService,

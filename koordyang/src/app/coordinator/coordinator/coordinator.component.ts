@@ -1,7 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { UserService } from "../../service/user.service";
-import { Router } from "@angular/router";
-import { DatashareService } from "../../service/datashare.service";
 import { AuthService } from "../../service/auth.service";
 
 @Component({
@@ -13,8 +11,6 @@ export class CoordinatorComponent implements OnInit {
 
   constructor(
     private _EventAdd: UserService,
-    private router: Router,
-    private DatashareService: DatashareService,
     public authService: AuthService
   ) {}
 

@@ -76,11 +76,40 @@ export class UserService {
     );
   }
 
-    //sending Mail for invitation
-    sendingMail(SendData) {
-      return this._http.post<any>(
-        "http://localhost:3000/events/inviteOthers",
-        SendData
+  //sending Mail for invitation
+  sendingMail(SendData) {
+    return this._http.post<any>(
+      "http://localhost:3000/events/inviteOthers",
+      SendData
+    );
+  }
+
+  //Getting one Participaant Details
+  async loadoneParticipantDetails(userid) {
+    const params = new HttpParams().set("params", userid);
+    return await this._http.get<any>(
+      "http://localhost:3000/participants/onedetails",
+      {
+        params,
+      }
+    );
+  }
+
+  //SendingDetails to activites to Save
+  ActivitesChange(SendDetails) {
+    return this._http.post<any>(
+      "http://localhost:3000/activities",
+      SendDetails
+    );
+  }
+
+    //SendingDetails to activites to Save
+    getActivities(Detailsid) {
+      const params = new HttpParams().set("params", Detailsid);
+      return this._http.get<any>(
+        "http://localhost:3000/activities/details",{
+          params,
+        }
       );
     }
 }
